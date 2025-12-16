@@ -2,9 +2,9 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Layout from './components/layout/Layout';
-import Dashboard from './pages/Dashboard';
-import Login from './pages/Login';
-import Invoices from './pages/billing/Invoices';
+import Dashboard from './context/pages/Dashboard';
+import Login from './context/pages/Login';
+import Invoices from './context/pages/billing/Invoices';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {

@@ -13,22 +13,22 @@ const Invoices = () => {
     }, []);
 
     const fetchInvoices = async () => {
+        setLoading(true);
         try {
-            // In a real implementation: const response = await api.get('/billing/invoices');
-            // Mocking data for now as backend might be empty
-            // setInvoices(response.data);
-
-            // MOCK DATA for Visual Verification
-            const mockData = [
-                { id: 'INV-001', patient_name: 'John Doe', amount: 150.00, status: 'PAID', date: new Date().toISOString() },
-                { id: 'INV-002', patient_name: 'Jane Smith', amount: 320.50, status: 'PENDING', date: new Date(Date.now() - 86400000).toISOString() },
-                { id: 'INV-003', patient_name: 'Robert Wilson', amount: 45.00, status: 'PAID', date: new Date(Date.now() - 172800000).toISOString() },
-            ];
-            setInvoices(mockData);
+            const response = await api.get('/billing/invoices');
+            // Map backend data to UI format if needed
+            const invoicesData = response.data.map(inv => ({
+                id: inv.id,
+                patient_name: inv.patient?.name || inv.patient_id,
+                amount: inv.total_amount,
+                status: inv.status?.toUpperCase?.() || inv.status,
+                date: inv.created_at
+            }));
+            setInvoices(invoicesData);
             setStats({
-                total: mockData.reduce((acc, curr) => acc + curr.amount, 0),
-                pending: mockData.filter(i => i.status === 'PENDING').length,
-                paid: mockData.filter(i => i.status === 'PAID').length
+                total: invoicesData.reduce((acc, curr) => acc + curr.amount, 0),
+                pending: invoicesData.filter(i => i.status === 'PENDING').length,
+                paid: invoicesData.filter(i => i.status === 'PAID').length
             });
         } catch (error) {
             console.error('Error fetching invoices:', error);
