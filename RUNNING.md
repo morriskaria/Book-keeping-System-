@@ -5,7 +5,7 @@ This handles the database and API logic.
 > If you are using WSL (Linux), you cannot use the Windows `venv`.
 
 1. Open a new terminal.
-2. Navigate to the backend directory:
+2. Navigate to the backend directory:n
    ```powershell
    cd "Book-keeping Backend"
    ```
