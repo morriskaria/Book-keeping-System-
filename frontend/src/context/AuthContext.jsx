@@ -19,18 +19,18 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     const login = async (email, password) => {
-        const formData = new FormData();
-        formData.append('username', email);
-        formData.append('password', password);
+        const params = new URLSearchParams();
+        params.append('username', email);
+        params.append('password', password);
 
         try {
-            const response = await api.post('/auth/login', formData, {
+            const response = await api.post('/auth/login', params, {
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
             });
 
             const { access_token } = response.data;
             localStorage.setItem('token', access_token);
-            setUser({ email, role: 'admin' }); // In real app, decode JWT for role
+            setUser({ email, role: 'admin' });
             return true;
         } catch (error) {
             console.error('Login failed:', error);

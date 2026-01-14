@@ -13,7 +13,7 @@ This handles the database and API logic.
    ```powershell
    pip install -r requirements.txt
    ```
-4. Run the server:
+4. Run the server
    ```powershell
    uvicorn app.main:app --reload
    ```

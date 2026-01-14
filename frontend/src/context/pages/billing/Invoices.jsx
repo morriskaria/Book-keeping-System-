@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import { Plus, Search, Filter, MoreVertical, FileText, CheckCircle, Clock } from 'lucide-react';
-import api from '../../services/api';
+import api from '../../../services/api';
 
 const Invoices = () => {
     const [invoices, setInvoices] = useState([]);
